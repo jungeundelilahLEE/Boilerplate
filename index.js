@@ -30,7 +30,7 @@ mogoose.connect(config.mongoURI, {
 
 
 app.get('/', (req, res) => { //! 이 부분이 브라우저에 보여지게 된다
-  res.send('Hello Willyyy!')
+  res.send('❤️🧡️Hello Willy!❤️🧡️')
 })
 
 // TODO 회원가입을 위한 라우트 만들기
