@@ -100,7 +100,8 @@ userSchema.methods.generateToken = function (cb) {
     user.token = token
     user.save(function(err, user) {
         if(err) return cb(err);
-            cb(null, user)
+        cb(null, user);
+            
     })
 }
 
@@ -119,8 +120,9 @@ userSchema.statics.findByToken = function (token, cb) {
         // TODO  유저 아이디를 이용해서 유저를 찾은 뒤, 
         // TODO  클라에서 가져온 토큰과 DB에 보관된 토큰이 일치하는지 확인하기
         user.findOne({ "_id" : decoded, "token" : token }, function (err, user) {
-            if (err) return cb(err);
-                cb(null, user)
+
+            if(err) return cb(err);
+            cb(null, user);
         })
 
     }) 

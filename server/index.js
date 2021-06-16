@@ -35,7 +35,10 @@ mogoose.connect(config.mongoURI, {
 .then(() => console.log("몽고 디비 연결 성공!"))
 .catch((err) => console.log(err))
 
-
+// TODO 랜딩페이지 테스트용 -> go to client/LandingPage.js
+app.get("/api/hello", (req, res) => {
+    res.send("안녕! 랜딩아!")
+})
 
 // TODO HELLO WILLY 출력
 app.get('/', (req, res) => { //! 이 부분이 브라우저에 보여지게 된다
@@ -58,7 +61,7 @@ app.post("/api/users/register", (req, res) => {
         if (err) {
             return res.json({ success : false, err })
         } else {
-            return res.status(200).json({ success : true, user : user})
+            return res.status(200).json({ success : true, user : userInfo})
         }
     })
 })
@@ -71,9 +74,9 @@ app.post("/api/users/register", (req, res) => {
 //! 비번까지 맞다면 토큰 생성한다
 app.post("/api/users/login", (req, res) => {    
 
-    User.findOne({ email : req.body.email }, (err, user) => {
-
-        if (!user) {
+    User.findOne({ email : req.body.email }, (err, userInfo) => {
+        
+        if (!userInfo) {
             return res.json({
                 loginSuccess : false,
                 message : "이메일에 해당하는 유저가 존재하지 않습니다"
@@ -86,14 +89,14 @@ app.post("/api/users/login", (req, res) => {
 
 
 
-        user.comparePassword(req.body.password, (err, isMatch) => {
+        userInfo.comparePassword(req.body.password, (err, isMatch) => {
             if (!isMatch) 
                 return res.json({ 
                     loginSuccess : false,  
                     message : "비밀번호가 올바르지 않습니다. 다시 확인해 주세요."
                 })
                 
-                user.generateToken((err, user) => {
+                userInfo.generateToken((err, userInfo) => {
                 //! 비밀번호가 일치한다면, 토큰 생성하는 과정
                 //! 우선 generateToken 메소드를 models/User 에만들어야 한다
                 //! 인자는 1개 (하나는 에러처리 / user)
@@ -101,9 +104,9 @@ app.post("/api/users/login", (req, res) => {
             
                 // TODO  토큰을 저장한다 
                 //! where? : cookie or local storage 등 여러가지방법 있음
-                res.cookie("x_auth", user.token)
+                res.cookie("x_auth", userInfo.token)
                 .status(200)
-                .json({ loginSuccess : true, userId : user._id })
+                .json({ loginSuccess : true, userId : userInfo._id })
             })
         
         }) 
