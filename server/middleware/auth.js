@@ -16,6 +16,8 @@ let auth = (req, res, next) => {
         req.user = user; // 마찬가지 user를 넣어줌
         //! req에 토큰과 유저를 넣어주는 이유는,
         //! auth.js에서 바로 토큰과 유저를 불러볼 수 있도록 하기 위함이다
+        console.log("user : ", user)
+
         next() 
         //! 마지막에 next()를 넣는 이유는, 
         //! auth.js에서 auth 미들웨어에서 계속 그 다음 인자로 넘어갈 수 있도록 하기 위함이다 

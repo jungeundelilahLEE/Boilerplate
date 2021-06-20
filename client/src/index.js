@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import "antd/dist/antd.css";
+
 // TODO Provider
 //! Provider : is the higher-order component provided by react-redux
 //!            that let you bind redux to react
@@ -39,7 +39,3 @@ ReactDOM.render(
 //! 리덕스 익스텐션을 사용하기위해 window.__...이 두줄의 코드도 포함하여야한다.
 
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

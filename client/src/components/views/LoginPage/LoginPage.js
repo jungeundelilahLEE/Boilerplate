@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 //! dispatch를 이용해서 action을 취하는데,,,,,
 import { loginUser } from "../../../_actions/user_action"
-
+import { withRouter } from "react-router-dom";
 
 function LoginPage(props) {
 
@@ -90,4 +90,4 @@ function LoginPage(props) {
     );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);
