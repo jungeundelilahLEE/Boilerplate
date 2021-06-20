@@ -1,5 +1,5 @@
 import axios from "axios"
-import {LOGIN_USER, REGISTER_USER} from "./types"
+import {LOGIN_USER, REGISTER_USER, AUTH_USER} from "./types"
 
 //! export default하지않고 export만해서 바로 LoginPage.js에서 불러다 사용
 //! 하는 점에 유의할 것..
@@ -28,6 +28,18 @@ export function registerUser(dataToSummit) {
             
     return {
         type: REGISTER_USER,
+        payload: request
+    }
+}
+
+export function auth(){ // get method는 body부분이 필요없다.
+
+    const request = axios.get('/api/users/auth')
+        .then(response => response.data)
+
+
+    return { 
+        type: AUTH_USER,
         payload: request
     }
 }

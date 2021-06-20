@@ -10,6 +10,7 @@ import {
 import LandingPage from "./components/views/LandingPage/LandingPage"
 import LoginPage from "./components/views/LoginPage/LoginPage"
 import RegisterPage from "./components/views/RegisterPage/RegisterPage"
+import Auth from "./hoc/auth"
 
 export default function App() {
   return (
@@ -17,11 +18,12 @@ export default function App() {
       <div>
         
         <Switch>
-          <Route exact path="/" component = {LandingPage}>
+          <Route exact path="/" component = {Auth(LandingPage, null, true)}>
+            {/* //! auth로 감싸주기 */}
           </Route>
-          <Route exact path="/login" component = {LoginPage}>
+          <Route exact path="/login" component = {Auth(LoginPage, false)}>
           </Route>
-          <Route exact path="/register" component = {RegisterPage}>
+          <Route exact path="/register" component = {Auth(RegisterPage, false)}>
           </Route>
         </Switch>
 
